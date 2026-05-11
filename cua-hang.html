@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html class="light" lang="vi">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>EGG TEA - Cửa hàng</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script src="assets/js/tailwind.config.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@100;300;400;600;700;800;900&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="assets/css/main.css" rel="stylesheet"/>
+<link rel="icon" type="image/png" href="./assets/img/favicon-egg-tea.png">
+</head>
+<body class="bg-surface text-on-surface" data-page="stores">
+<div id="site-header"></div>
+
+<main class="min-h-screen">
+  <!-- Hero -->
+  <section class="relative h-[180px] md:h-[220px] overflow-hidden flex items-center justify-center">
+    <div class="absolute inset-0 z-0">
+      <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuALNtGMo9uvskEMiI0SuijVHcfAkwVLpuORLFUXLMdGGo4nx5Nc8h3hrNOB71ZcK8Iju9mnnPg7QTBtolxpvWiFvvSlc0C5OZDgyel76NceeAhNDSTkRYLia3JwJv8Z_U8IluOI3fEz01NJe2QOLy4FRyahCEiRe-oZCmKEvs12yv-2OCHm1kGzYw9srf56Q8MGMjT7ft-EskKF8UaAi90v0DomsClzV2hVF-SxyHBKPhScGuNS04Jv4V_L2XSwobr5_UR3ED8ULWJA"/>
+      <div class="absolute inset-0 bg-black/40 backdrop-blur-[2px]"></div>
+    </div>
+    <div class="relative z-10 text-center px-gutter">
+      <h1 class="font-display-lg text-headline-lg md:text-display-lg text-white">Vị trí cửa hàng</h1>
+      <p class="font-body-md text-body-md text-white/90 max-w-2xl mx-auto mt-1 hidden md:block">Tìm Egg Tea gần bạn nhất để thưởng thức trà sữa thủ công tươi mới mỗi ngày.</p>
+    </div>
+  </section>
+
+  <!-- Locator -->
+  <section class="max-w-7xl mx-auto px-gutter py-md md:py-lg">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-lg lg:items-stretch">
+      <!-- Store list -->
+      <div class="lg:col-span-5 xl:col-span-4">
+        <div id="store-list" class="space-y-md">
+
+          <button type="button"
+                  class="store-card w-full text-left bg-white p-md rounded-2xl border-2 border-outline-variant/40 hover:border-primary hover:shadow-md transition-all group"
+                  data-store="hungvuong"
+                  data-address="152 Hùng Vương, Thành phố Nam Định, Tỉnh Ninh Bình"
+                  data-name="Cơ sở 1 - Hùng Vương">
+            <div class="flex justify-between items-start gap-sm mb-sm">
+              <div>
+                <span class="inline-block bg-primary text-on-primary px-2.5 py-0.5 rounded-full font-bold text-[11px] tracking-wide mb-1">CƠ SỞ 1</span>
+                <h3 class="font-headline-md text-[18px] leading-snug text-on-surface group-hover:text-primary transition-colors">Egg Tea - Hùng Vương</h3>
+              </div>
+              <span class="shrink-0 bg-secondary-container text-on-secondary-container px-2 py-1 rounded-full font-label-sm text-[11px] whitespace-nowrap">Đang mở</span>
+            </div>
+            <p class="font-body-md text-body-md text-on-surface-variant mb-sm flex items-start gap-2">
+              <span class="material-symbols-outlined text-primary text-[20px] mt-0.5 shrink-0">location_on</span>
+              <span>152 Hùng Vương, P.Nam Định, Tỉnh Ninh Bình</span>
+            </p>
+            <div class="flex flex-wrap gap-x-md gap-y-1 text-on-surface-variant font-label-sm text-label-sm">
+              <div class="flex items-center gap-1.5"><span class="material-symbols-outlined text-[16px]">schedule</span> 08:00 - 22:30</div>
+              <div class="flex items-center gap-1.5"><span class="material-symbols-outlined text-[16px]">call</span> 08888.365.56</div>
+            </div>
+          </button>
+
+          <button type="button"
+                  class="store-card w-full text-left bg-white p-md rounded-2xl border-2 border-outline-variant/40 hover:border-primary hover:shadow-md transition-all group"
+                  data-store="thdao"
+                  data-address="173 Trần Hưng Đạo, Thành phố Nam Định, Tỉnh Ninh Bình"
+                  data-name="Cơ sở 2 - Trần Hưng Đạo">
+            <div class="flex justify-between items-start gap-sm mb-sm">
+              <div>
+                <span class="inline-block bg-primary text-on-primary px-2.5 py-0.5 rounded-full font-bold text-[11px] tracking-wide mb-1">CƠ SỞ 2</span>
+                <h3 class="font-headline-md text-[18px] leading-snug text-on-surface group-hover:text-primary transition-colors">Egg Tea - Trần Hưng Đạo</h3>
+              </div>
+              <span class="shrink-0 bg-secondary-container text-on-secondary-container px-2 py-1 rounded-full font-label-sm text-[11px] whitespace-nowrap">Đang mở</span>
+            </div>
+            <p class="font-body-md text-body-md text-on-surface-variant mb-sm flex items-start gap-2">
+              <span class="material-symbols-outlined text-primary text-[20px] mt-0.5 shrink-0">location_on</span>
+              <span>173 Trần Hưng Đạo, P.Nam Định, Tỉnh Ninh Bình</span>
+            </p>
+            <div class="flex flex-wrap gap-x-md gap-y-1 text-on-surface-variant font-label-sm text-label-sm">
+              <div class="flex items-center gap-1.5"><span class="material-symbols-outlined text-[16px]">schedule</span> 08:00 - 22:00</div>
+              <div class="flex items-center gap-1.5"><span class="material-symbols-outlined text-[16px]">call</span> 0886.56.56.38</div>
+            </div>
+          </button>
+
+        </div>
+      </div>
+
+      <!-- Map column -->
+      <div class="lg:col-span-7 xl:col-span-8 relative h-[360px] md:h-[480px] lg:h-auto lg:min-h-[480px] rounded-2xl overflow-hidden shadow-lg border border-outline-variant/30">
+        <iframe id="store-map"
+                src="https://maps.google.com/maps?q=152%20H%C3%B9ng%20V%C6%B0%C6%A1ng%2C%20Th%C3%A0nh%20ph%E1%BB%91%20Nam%20%C4%90%E1%BB%8Bnh%2C%20T%E1%BB%89nh%20Ninh%20B%C3%ACnh&z=17&output=embed"
+                class="absolute inset-0 w-full h-full border-0"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                allowfullscreen></iframe>
+
+        <!-- Custom pin overlay — anchored at the geo-center of the iframe -->
+        <div class="map-pin-overlay absolute left-1/2 top-1/2 z-10 pointer-events-none -translate-x-1/2 -translate-y-full">
+          <span class="map-pin-pulse"></span>
+          <span class="map-pin-pulse map-pin-pulse--delay"></span>
+          <div class="map-pin">
+            <span class="material-symbols-outlined text-white text-[26px]" style="font-variation-settings:'FILL' 1;">storefront</span>
+          </div>
+          <div class="map-pin-shadow"></div>
+        </div>
+
+        <!-- Info window — anchored above the pin like a Google Maps popup -->
+        <div class="map-infowindow absolute left-1/2 top-1/2 z-20 -translate-x-1/2 pointer-events-none">
+          <div class="bg-white px-3 py-2 rounded-xl shadow-xl border border-primary-container/40 flex gap-2 items-center pointer-events-auto min-w-[240px] max-w-[300px]">
+            <div class="w-9 h-9 rounded-lg bg-primary-fixed flex items-center justify-center text-primary flex-shrink-0">
+              <span class="material-symbols-outlined text-[20px]" style="font-variation-settings:'FILL' 1;">storefront</span>
+            </div>
+            <div class="flex-1 min-w-0">
+              <h4 id="active-store-name" class="font-bold text-primary text-sm truncate">Cơ sở 1 - Hùng Vương</h4>
+              <p id="active-store-address" class="text-[11px] text-on-surface-variant truncate">152 Hùng Vương, P.Nam Định, Tỉnh Ninh Bình</p>
+            </div>
+          </div>
+          <!-- Pointer arrow pointing down to pin -->
+          <span class="map-infowindow-arrow"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<div id="site-footer"></div>
+<script src="assets/js/layout.js"></script>
+<script>
+  (function () {
+    const list = document.getElementById('store-list');
+    const map = document.getElementById('store-map');
+    const nameEl = document.getElementById('active-store-name');
+    const addrEl = document.getElementById('active-store-address');
+
+    function setActive(card) {
+      list.querySelectorAll('.store-card').forEach(c => {
+        c.classList.remove('border-primary', 'bg-primary-fixed/30');
+        c.classList.add('border-outline-variant/40');
+      });
+      card.classList.add('border-primary', 'bg-primary-fixed/30');
+      card.classList.remove('border-outline-variant/40');
+
+      const address = card.dataset.address;
+      const name = card.dataset.name;
+      const enc = encodeURIComponent(address);
+
+      map.src = `https://maps.google.com/maps?q=${enc}&z=17&output=embed`;
+      nameEl.textContent = name;
+      addrEl.textContent = address;
+    }
+
+    list.querySelectorAll('.store-card').forEach(card => {
+      card.addEventListener('click', () => setActive(card));
+    });
+
+    // Mark first card active by default
+    const first = list.querySelector('.store-card');
+    if (first) {
+      first.classList.add('border-primary', 'bg-primary-fixed/30');
+      first.classList.remove('border-outline-variant/40');
+    }
+  })();
+</script>
+</body>
+</html>

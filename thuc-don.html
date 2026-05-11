@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html class="light" lang="vi">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>EGG TEA - Thực đơn</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script src="assets/js/tailwind.config.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@100;300;400;600;700;800;900&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="assets/css/main.css" rel="stylesheet"/>
+<link rel="icon" type="image/png" href="./assets/img/favicon-egg-tea.png">
+<style>
+  .font-serif-accent { font-family: 'Playfair Display', serif; font-style: italic; font-weight: 500; }
+  .chip-active { background:#1F1B1B !important; color:#FFFBEF !important; border-color:#1F1B1B !important; }
+  .menu-item.is-hidden { display: none !important; }
+  .menu-section.is-empty { display: none !important; }
+</style>
+</head>
+<body class="bg-surface text-on-surface" data-page="menu">
+<div id="site-header"></div>
+
+<main>
+  <!-- Hero (compact) -->
+  <section class="relative overflow-hidden bg-gradient-to-b from-surface-container-low to-surface">
+    <div class="absolute inset-0 -z-10 dotted-divider opacity-20"></div>
+    <div class="max-w-7xl mx-auto px-gutter py-md text-center relative">
+      <span class="eyebrow justify-center">Thực đơn 2026</span>
+      <h1 class="font-display-lg text-[clamp(24px,3vw,36px)] leading-tight text-on-surface mt-2">
+        <span class="font-serif-accent text-secondary">Tươi mới</span> mỗi ngày, <span class="text-tertiary">đậm vị</span> mỗi ngụm
+      </h1>
+    </div>
+  </section>
+
+  <!-- ════ Search + filter (sticky) ════ -->
+  <div class="sticky top-[60px] md:top-[72px] z-40 bg-surface/90 backdrop-blur border-b border-outline-variant">
+    <div class="max-w-7xl mx-auto px-gutter py-md flex flex-col md:flex-row gap-md items-stretch md:items-center">
+      <!-- Search -->
+      <label class="relative flex-1 max-w-xl">
+        <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+        <input id="menu-search" type="search" placeholder="Tìm món bạn thích..."
+               class="w-full pl-12 pr-12 py-3 rounded-full bg-surface-container-low border border-outline-variant focus:border-primary outline-none transition-colors"/>
+        <button id="menu-search-clear" type="button"
+                class="hidden absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-surface-container hover:bg-surface-container-high transition-colors items-center justify-center">
+          <span class="material-symbols-outlined text-[18px]">close</span>
+        </button>
+      </label>
+
+      <!-- Filter chips -->
+      <div id="menu-filters" class="flex gap-2 overflow-x-auto no-scrollbar -mx-gutter md:mx-0 px-gutter md:px-0">
+        <button data-cat="all"           class="chip chip-active whitespace-nowrap px-4 py-2 rounded-full border-2 border-outline-variant font-bold text-sm hover:border-on-surface transition-colors">Tất cả</button>
+        <button data-cat="new"           class="chip whitespace-nowrap px-4 py-2 rounded-full border-2 border-outline-variant font-bold text-sm hover:border-on-surface transition-colors">Mới</button>
+        <button data-cat="best-seller"   class="chip whitespace-nowrap px-4 py-2 rounded-full border-2 border-outline-variant font-bold text-sm hover:border-on-surface transition-colors">Bán chạy</button>
+        <button data-cat="tra-sua"       class="chip whitespace-nowrap px-4 py-2 rounded-full border-2 border-outline-variant font-bold text-sm hover:border-on-surface transition-colors">Trà sữa</button>
+        <button data-cat="matcha"        class="chip whitespace-nowrap px-4 py-2 rounded-full border-2 border-outline-variant font-bold text-sm hover:border-on-surface transition-colors">Matcha</button>
+        <button data-cat="tra-trai-cay"  class="chip whitespace-nowrap px-4 py-2 rounded-full border-2 border-outline-variant font-bold text-sm hover:border-on-surface transition-colors">Trà trái cây</button>
+        <button data-cat="tra-kombucha"  class="chip whitespace-nowrap px-4 py-2 rounded-full border-2 border-outline-variant font-bold text-sm hover:border-on-surface transition-colors">Kombucha</button>
+        <button data-cat="ca-phe"        class="chip whitespace-nowrap px-4 py-2 rounded-full border-2 border-outline-variant font-bold text-sm hover:border-on-surface transition-colors">Cà phê</button>
+        <button data-cat="special"       class="chip whitespace-nowrap px-4 py-2 rounded-full border-2 border-outline-variant font-bold text-sm hover:border-on-surface transition-colors">Special</button>
+        <button data-cat="kem"           class="chip whitespace-nowrap px-4 py-2 rounded-full border-2 border-outline-variant font-bold text-sm hover:border-on-surface transition-colors">Kem</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="menu-root" class="max-w-7xl mx-auto px-gutter py-lg">
+
+  <!-- Empty state -->
+  <div id="empty-state" class="hidden text-center py-xl">
+    <span class="material-symbols-outlined text-[64px] text-outline">search_off</span>
+    <p class="font-headline-md text-on-surface mt-3">Không tìm thấy món phù hợp</p>
+    <p class="text-on-surface-variant text-sm mt-1">Thử từ khoá khác hoặc xoá bộ lọc.</p>
+  </div>
+
+  <!-- ════ Section: Món Mới ════ -->
+  <section class="menu-section mb-xl" data-section="new">
+    <div class="flex items-center gap-sm mb-md">
+      <div class="w-2 h-8 bg-primary rounded-full"></div>
+      <h3 class="font-headline-lg text-headline-lg text-on-surface">Món Mới</h3>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-md">
+      <div class="menu-item md:col-span-2 relative bg-surface-container rounded-xl overflow-hidden group border border-outline-variant" data-cat="new" data-name="Trà sữa khoai môn hoàng kim taro premium">
+        <div class="absolute inset-0 bg-gradient-to-r from-surface-container/95 to-transparent z-10"></div>
+        <img alt="" class="absolute right-0 top-0 h-full w-2/3 object-cover group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5c0PrwpyaFjuC5pCVdv9mEC4REz8Zph8qMBpNGJAE_gnr4oYuQ_gP-hktwlwrS-vxW7vX50eQyYih2meCq6NyY-T7RKrkdGXerHY7OOo_UP6VOG49kqv9chuUrCwnxd7CpQqdW_pNe-SDfKBwZwgCSTMBtMGuJMnOKOSOcmJI2uTDalbLg1zADm_35kX-w1jZ9ZSLmHrXbBZUffvTZ99skSJq5zVhQ9bUdQel-PerToYUjUzEYiTwxL4_sySvtQZpYeqVX9pjFDFw"/>
+        <div class="relative z-20 p-lg h-full flex flex-col justify-center max-w-md">
+          <span class="text-tertiary font-bold tracking-widest text-xs uppercase mb-xs">Đặc sản theo mùa</span>
+          <h4 class="font-headline-lg text-headline-lg text-on-surface mb-sm">Trà Sữa Khoai Môn Hoàng Kim</h4>
+          <p class="font-body-md text-body-md text-on-surface-variant mb-md">Cốt trà lài thơm ngát, khoai môn dẻo bùi, phủ trân châu hoàng kim dai giòn.</p>
+          <div class="flex items-baseline gap-sm mb-lg">
+            <span class="font-headline-md text-headline-md text-tertiary">45.000đ</span>
+            <span class="text-on-surface-variant line-through text-sm">60.000đ</span>
+          </div>
+          <button class="bg-primary text-on-primary font-bold px-8 py-3 rounded-full w-fit hover:shadow-lg transition-all active:scale-95">Thử Ngay</button>
+        </div>
+      </div>
+      <div class="menu-item bg-surface-container-low rounded-xl p-md border border-outline-variant flex flex-col items-center text-center relative" data-cat="new" data-name="Trà trái cây nhiệt đới tropical">
+        <div class="freshness-badge">Món Hot</div>
+        <div class="mb-sm relative">
+          <div class="w-40 h-40 bg-primary-fixed/40 rounded-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 blur-xl"></div>
+          <img alt="" class="w-40 h-40 object-contain drop-shadow-2xl" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDE6oNobZu1smwx3xO17gBTbTBN_jNMGymYSGWIB3kDMm42kmE4msp0KfkCwFRzMQ0roWeL-1LJ3HqGeCdu94C0d3xC3Cqq3_Tu-m0hkOBUK7V1qJzH9QwXux5pidxQv2gSFJBPG7fAMYNGyC1f3HBbNGntwI7iR0YlVYmEUuLwjkpvPG-uYawPshP0RTNrxrq-c69rvaEEQ0YLt-feHaW4f2_Arh9mo2Nhdqlu-AxheazUWlP2oHEuHaD9JeA7-xfbXOilyfH_b3O6"/>
+        </div>
+        <h4 class="font-headline-md text-headline-md text-on-surface">Trà Kombucha Nhiệt Đới</h4>
+        <p class="font-body-md text-body-md text-on-surface-variant mb-sm">Tươi mát với các loại trái cây theo mùa.</p>
+        <span class="font-headline-md text-headline-md text-tertiary mt-auto">25.000đ</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ Section: Bán Chạy Nhất ════ -->
+  <section class="menu-section mb-xl mt-xl" data-section="best-seller">
+    <div class="relative bg-gradient-to-br from-primary-container/50 via-tertiary-fixed/40 to-secondary-container/40 rounded-3xl p-lg overflow-hidden">
+      <div class="absolute -top-16 -right-16 w-56 h-56 bg-primary/15 rounded-full blur-3xl"></div>
+      <div class="absolute -bottom-20 -left-20 w-64 h-64 bg-tertiary/10 rounded-full blur-3xl"></div>
+
+      <div class="flex items-center gap-sm mb-lg relative z-10">
+        <span class="material-symbols-outlined text-primary text-[28px]" style="font-variation-settings:'FILL' 1;">star</span>
+        <h3 class="font-headline-lg text-headline-lg text-on-surface">Bán Chạy Nhất</h3>
+        <span class="ml-auto text-on-surface-variant text-sm italic hidden md:inline">Top Nhài Sữa được yêu thích</span>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-md relative z-10">
+        <div class="menu-item group bg-surface-container-low rounded-2xl border border-outline-variant overflow-hidden shadow-sm hover:shadow-md hover:-translate-y-1 transition-all" data-cat="best-seller tra-sua" data-name="Nhài sữa sốt xoài cát mango">
+          <div class="aspect-[5/4] overflow-hidden bg-primary-fixed/30">
+            <img loading="lazy" alt="" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://images.unsplash.com/photo-1639927663411-35f23bb792b7?auto=format&fit=crop&w=600&q=80"/>
+          </div>
+          <div class="p-md text-center">
+            <h4 class="font-headline-md text-[20px] text-on-surface mb-xs">Nhài Sữa Sốt Xoài</h4>
+            <p class="text-on-surface-variant text-sm mb-md">Xoài chín ngọt ngào tự nhiên, hoà quyện trà nhài thanh tao.</p>
+            <div class="size-selector" data-color="primary">
+              <span class="size-price font-headline-md text-[22px] text-primary font-bold">25.000đ</span>
+              <div class="size-options">
+                <button type="button" class="size-btn" data-size="S" data-price="15000">S</button>
+                <button type="button" class="size-btn is-active" data-size="M" data-price="25000">M</button>
+                <button type="button" class="size-btn" data-size="L" data-price="35000">L</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="menu-item group bg-surface-container-low rounded-2xl border border-outline-variant overflow-hidden shadow-sm hover:shadow-md hover:-translate-y-1 transition-all" data-cat="best-seller tra-sua" data-name="Nhài sữa dâu tây đà lạt strawberry">
+          <div class="aspect-[5/4] overflow-hidden bg-primary-fixed/30">
+            <img loading="lazy" alt="" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://images.unsplash.com/photo-1647201201594-dff923210b3a?auto=format&fit=crop&w=600&q=80"/>
+          </div>
+          <div class="p-md text-center">
+            <h4 class="font-headline-md text-[20px] text-on-surface mb-xs">Nhài Sữa Sốt Dâu Tây</h4>
+            <p class="text-on-surface-variant text-sm mb-md">Dâu tây tươi ngon thơm mát, chua ngọt dịu dàng.</p>
+            <div class="size-selector" data-color="primary">
+              <span class="size-price font-headline-md text-[22px] text-primary font-bold">25.000đ</span>
+              <div class="size-options">
+                <button type="button" class="size-btn" data-size="S" data-price="15000">S</button>
+                <button type="button" class="size-btn is-active" data-size="M" data-price="25000">M</button>
+                <button type="button" class="size-btn" data-size="L" data-price="35000">L</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="menu-item group bg-surface-container-low rounded-2xl border border-outline-variant overflow-hidden shadow-sm hover:shadow-md hover:-translate-y-1 transition-all" data-cat="best-seller tra-sua" data-name="Nhài sữa chanh leo mật ong passionfruit">
+          <div class="aspect-[5/4] overflow-hidden bg-primary-fixed/30">
+            <img loading="lazy" alt="" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://images.unsplash.com/photo-1647211429106-ce68340e846a?auto=format&fit=crop&w=600&q=80"/>
+          </div>
+          <div class="p-md text-center">
+            <h4 class="font-headline-md text-[20px] text-on-surface mb-xs">Nhài Sữa Sốt Chanh Leo</h4>
+            <p class="text-on-surface-variant text-sm mb-md">Chanh leo chua thanh giàu vitamin, sảng khoái tức thì.</p>
+            <div class="size-selector" data-color="primary">
+              <span class="size-price font-headline-md text-[22px] text-primary font-bold">25.000đ</span>
+              <div class="size-options">
+                <button type="button" class="size-btn" data-size="S" data-price="15000">S</button>
+                <button type="button" class="size-btn is-active" data-size="M" data-price="25000">M</button>
+                <button type="button" class="size-btn" data-size="L" data-price="35000">L</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ Section: Trà Sữa ════ -->
+  <section class="menu-section mb-xl" data-section="tra-sua">
+    <div class="flex items-center gap-sm mb-md">
+      <div class="w-2 h-8 bg-primary rounded-full"></div>
+      <h3 class="font-headline-lg text-headline-lg text-on-surface">🧋 Trà Sữa</h3>
+      <span class="ml-auto text-on-surface-variant text-sm italic hidden md:inline">Đơn vị: nghìn đồng</span>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-md">
+      <div class="menu-item group bg-surface-container-low rounded-2xl border border-outline-variant overflow-hidden shadow-sm hover:shadow-md hover:-translate-y-1 transition-all" data-cat="tra-sua" data-name="Hồng trà đào sữa peach black milk tea">
+        <div class="aspect-[5/4] overflow-hidden bg-primary-fixed/30">
+          <img loading="lazy" alt="" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://images.unsplash.com/photo-1676693420436-7fa448f054eb?auto=format&fit=crop&w=600&q=80"/>
+        </div>
+        <div class="p-md text-center">
+          <h4 class="font-headline-md text-[20px] text-on-surface mb-xs">Hồng Trà Đào Sữa</h4>
+          <p class="text-on-surface-variant text-sm mb-md">Hồng trà đậm hoà quyện đào ngọt và sữa béo.</p>
+          <div class="size-selector" data-color="primary">
+            <span class="size-price font-headline-md text-[22px] text-primary font-bold">20.000đ</span>
+            <div class="size-options">
+              <button type="button" class="size-btn" data-size="S" data-price="10000">S</button>
+              <button type="button" class="size-btn is-active" data-size="M" data-price="20000">M</button>
+              <button type="button" class="size-btn" data-size="L" data-price="30000">L</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-item group bg-surface-container-low rounded-2xl border border-outline-variant overflow-hidden shadow-sm hover:shadow-md hover:-translate-y-1 transition-all" data-cat="tra-sua" data-name="Sữa tươi trân châu nướng grilled boba">
+        <div class="aspect-[5/4] overflow-hidden bg-primary-fixed/30">
+          <img loading="lazy" alt="" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://images.unsplash.com/photo-1529474944862-bf4949bd2f1a?auto=format&fit=crop&w=600&q=80"/>
+        </div>
+        <div class="p-md text-center">
+          <h4 class="font-headline-md text-[20px] text-on-surface mb-xs">Sữa Tươi Trân Châu Nướng</h4>
+          <p class="text-on-surface-variant text-sm mb-md">Sữa tươi nguyên chất, trân châu nướng giòn dai.</p>
+          <div class="size-selector" data-color="primary">
+            <span class="size-price font-headline-md text-[22px] text-primary font-bold">25.000đ</span>
+            <div class="size-options">
+              <button type="button" class="size-btn is-disabled" data-size="S">S</button>
+              <button type="button" class="size-btn is-active" data-size="M" data-price="25000">M</button>
+              <button type="button" class="size-btn" data-size="L" data-price="35000">L</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-item group bg-surface-container-low rounded-2xl border border-outline-variant overflow-hidden shadow-sm hover:shadow-md hover:-translate-y-1 transition-all" data-cat="tra-sua" data-name="Trà sữa nướng truyền thống grilled milk tea">
+        <div class="aspect-[5/4] overflow-hidden bg-primary-fixed/30">
+          <img loading="lazy" alt="" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://images.unsplash.com/photo-1625358442567-239b2be6b7b0?auto=format&fit=crop&w=600&q=80"/>
+        </div>
+        <div class="p-md text-center">
+          <h4 class="font-headline-md text-[20px] text-on-surface mb-xs">Trà Sữa Nướng Truyền Thống</h4>
+          <p class="text-on-surface-variant text-sm mb-md">Trà sữa nướng thơm khói, vị truyền thống đậm đà.</p>
+          <div class="size-selector" data-color="primary">
+            <span class="size-price font-headline-md text-[22px] text-primary font-bold">20.000đ</span>
+            <div class="size-options">
+              <button type="button" class="size-btn" data-size="S" data-price="10000">S</button>
+              <button type="button" class="size-btn is-active" data-size="M" data-price="20000">M</button>
+              <button type="button" class="size-btn" data-size="L" data-price="30000">L</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-item group bg-surface-container-low rounded-2xl border border-outline-variant overflow-hidden shadow-sm hover:shadow-md hover:-translate-y-1 transition-all" data-cat="tra-sua" data-name="Trà sữa nướng truyền thống kem cheese">
+        <div class="aspect-[5/4] overflow-hidden bg-primary-fixed/30">
+          <img loading="lazy" alt="" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://images.unsplash.com/photo-1734770580735-796a00e42cb2?auto=format&fit=crop&w=600&q=80"/>
+        </div>
+        <div class="p-md text-center">
+          <h4 class="font-headline-md text-[20px] text-on-surface mb-xs">Trà Sữa Nướng Truyền Thống Kem Cheese</h4>
+          <p class="text-on-surface-variant text-sm mb-md">Trà sữa nướng phủ kem cheese mặn ngọt béo ngậy.</p>
+          <div class="size-selector" data-color="primary">
+            <span class="size-price font-headline-md text-[22px] text-primary font-bold">25.000đ</span>
+            <div class="size-options">
+              <button type="button" class="size-btn is-disabled" data-size="S">S</button>
+              <button type="button" class="size-btn is-active" data-size="M" data-price="25000">M</button>
+              <button type="button" class="size-btn" data-size="L" data-price="35000">L</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-item group bg-surface-container-low rounded-2xl border border-outline-variant overflow-hidden shadow-sm hover:shadow-md hover:-translate-y-1 transition-all" data-cat="tra-sua" data-name="Nhài sữa truyền thống jasmine milk tea">
+        <div class="aspect-[5/4] overflow-hidden bg-primary-fixed/30">
+          <img loading="lazy" alt="" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://images.unsplash.com/photo-1558857563-b371033873b8?auto=format&fit=crop&w=600&q=80"/>
+        </div>
+        <div class="p-md text-center">
+          <h4 class="font-headline-md text-[20px] text-on-surface mb-xs">Nhài Sữa Truyền Thống</h4>
+          <p class="text-on-surface-variant text-sm mb-md">Trà nhài thanh tao quyện sữa béo dịu nhẹ.</p>
+          <div class="size-selector" data-color="primary">
+            <span class="size-price font-headline-md text-[22px] text-primary font-bold">20.000đ</span>
+            <div class="size-options">
+              <button type="button" class="size-btn" data-size="S" data-price="10000">S</button>
+              <button type="button" class="size-btn is-active" data-size="M" data-price="20000">M</button>
+              <button type="button" class="size-btn" data-size="L" data-price="30000">L</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-item group bg-surface-container-low rounded-2xl border border-outline-variant overflow-hidden shadow-sm hover:shadow-md hover:-translate-y-1 transition-all" data-cat="tra-sua" data-name="Nhài sữa sốt chanh leo passionfruit">
+        <div class="aspect-[5/4] overflow-hidden bg-primary-fixed/30">
+          <img loading="lazy" alt="" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://images.unsplash.com/photo-1647211429106-ce68340e846a?auto=format&fit=crop&w=600&q=80"/>
+        </div>
+        <div class="p-md text-center">
+          <h4 class="font-headline-md text-[20px] text-on-surface mb-xs">Nhài Sữa Sốt Chanh Leo</h4>
+          <p class="text-on-surface-variant text-sm mb-md">Chanh leo chua thanh giàu vitamin, sảng khoái tức thì.</p>
+          <div class="size-selector" data-color="primary">
+            <span class="size-price font-headline-md text-[22px] text-primary font-bold">25.000đ</span>
+            <div class="size-options">
+              <button type="button" class="size-btn" data-size="S" data-price="15000">S</button>
+              <button type="button" class="size-btn is-active" data-size="M" data-price="25000">M</button>
+              <button type="button" class="size-btn" data-size="L" data-price="35000">L</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-item group bg-surface-container-low rounded-2xl border border-outline-variant overflow-hidden shadow-sm hover:shadow-md hover:-translate-y-1 transition-all" data-cat="tra-sua" data-name="Nhài sữa sốt xoài mango">
+        <div class="aspect-[5/4] overflow-hidden bg-primary-fixed/30">
+          <img loading="lazy" alt="" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://images.unsplash.com/photo-1639927663411-35f23bb792b7?auto=format&fit=crop&w=600&q=80"/>
+        </div>
+        <div class="p-md text-center">
+          <h4 class="font-headline-md text-[20px] text-on-surface mb-xs">Nhài Sữa Sốt Xoài</h4>
+          <p class="text-on-surface-variant text-sm mb-md">Xoài chín ngọt ngào tự nhiên, hoà quyện trà nhài thanh tao.</p>
+          <div class="size-selector" data-color="primary">
+            <span class="size-price font-headline-md text-[22px] text-primary font-bold">25.000đ</span>
+            <div class="size-options">
+              <button type="button" class="size-btn" data-size="S" data-price="15000">S</button>
+              <button type="button" class="size-btn is-active" data-size="M" data-price="25000">M</button>
+              <button type="button" class="size-btn" data-size="L" data-price="35000">L</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-item group bg-surface-container-low rounded-2xl border border-outline-variant overflow-hidden shadow-sm hover:shadow-md hover:-translate-y-1 transition-all" data-cat="tra-sua" data-name="Nhài sữa sốt dâu tây strawberry">
+        <div class="aspect-[5/4] overflow-hidden bg-primary-fixed/30">
+          <img loading="lazy" alt="" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://images.unsplash.com/photo-1647201201594-dff923210b3a?auto=format&fit=crop&w=600&q=80"/>
+        </div>
+        <div class="p-md text-center">
+          <h4 class="font-headline-md text-[20px] text-on-surface mb-xs">Nhài Sữa Sốt Dâu Tây</h4>
+          <p class="text-on-surface-variant text-sm mb-md">Dâu tây tươi mát chua ngọt dịu dàng.</p>
+          <div class="size-selector" data-color="primary">
+            <span class="size-price font-headline-md text-[22px] text-primary font-bold">25.000đ</span>
+            <div class="size-options">
+              <button type="button" class="size-btn" data-size="S" data-price="15000">S</button>
+              <button type="button" class="size-btn is-active" data-size="M" data-price="25000">M</button>
+              <button type="button" class="size-btn" data-size="L" data-price="35000">L</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ Section: Matcha ════ -->
+  <section class="menu-section mb-xl" data-section="matcha">
+    <div class="flex items-center gap-sm mb-md">
+      <div class="w-2 h-8 bg-secondary rounded-full"></div>
+      <h3 class="font-headline-lg text-headline-lg text-on-surface">🍵 Matcha</h3>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-md">
+      <div class="menu-item group bg-surface-container-low rounded-2xl border border-outline-variant overflow-hidden shadow-sm hover:shadow-md hover:-translate-y-1 transition-all" data-cat="matcha" data-name="Matcha truyền thống traditional">
+        <div class="aspect-[5/4] overflow-hidden bg-secondary-container/40">
+          <img loading="lazy" alt="" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://images.unsplash.com/photo-1515823064-d6e0c04616a7?auto=format&fit=crop&w=600&q=80"/>
+        </div>
+        <div class="p-md text-center">
+          <h4 class="font-headline-md text-[20px] text-on-surface mb-xs">Matcha Truyền Thống</h4>
+          <p class="text-on-surface-variant text-sm mb-md">Bột matcha Nhật nguyên chất, vị thanh tao chuẩn vị.</p>
+          <div class="size-selector" data-color="secondary">
+            <span class="size-price font-headline-md text-[22px] text-secondary font-bold">25.000đ</span>
+            <div class="size-options">
+              <button type="button" class="size-btn" data-size="S" data-price="15000">S</button>
+              <button type="button" class="size-btn is-active" data-size="M" data-price="25000">M</button>
+              <button type="button" class="size-btn" data-size="L" data-price="35000">L</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-item group bg-surface-container-low rounded-2xl border border-outline-variant overflow-hidden shadow-sm hover:shadow-md hover:-translate-y-1 transition-all" data-cat="matcha" data-name="Matcha đậu đỏ red bean">
+        <div class="aspect-[5/4] overflow-hidden bg-secondary-container/40">
+          <img loading="lazy" alt="" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://images.unsplash.com/photo-1717398804885-a6c22b3e5c2f?auto=format&fit=crop&w=600&q=80"/>
+        </div>
+        <div class="p-md text-center">
+          <h4 class="font-headline-md text-[20px] text-on-surface mb-xs">Matcha Đậu Đỏ</h4>
+          <p class="text-on-surface-variant text-sm mb-md">Matcha thơm quyện đậu đỏ bùi ngọt tự nhiên.</p>
+          <div class="size-selector" data-color="secondary">
+            <span class="size-price font-headline-md text-[22px] text-secondary font-bold">30.000đ</span>
+            <div class="size-options">
+              <button type="button" class="size-btn" data-size="S" data-price="20000">S</button>
+              <button type="button" class="size-btn is-active" data-size="M" data-price="30000">M</button>
+              <button type="button" class="size-btn" data-size="L" data-price="40000">L</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-item group bg-surface-container-low rounded-2xl border border-outline-variant overflow-hidden shadow-sm hover:shadow-md hover:-translate-y-1 transition-all" data-cat="matcha" data-name="Matcha kem cheese cheese foam">
+        <div class="aspect-[5/4] overflow-hidden bg-secondary-container/40">
+          <img loading="lazy" alt="" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://images.unsplash.com/photo-1631308491952-040f80133535?auto=format&fit=crop&w=600&q=80"/>
+        </div>
+        <div class="p-md text-center">
+          <h4 class="font-headline-md text-[20px] text-on-surface mb-xs">Matcha Kem Cheese</h4>
+          <p class="text-on-surface-variant text-sm mb-md">Matcha phủ lớp kem cheese mặn ngọt hấp dẫn.</p>
+          <div class="size-selector" data-color="secondary">
+            <span class="size-price font-headline-md text-[22px] text-secondary font-bold">30.000đ</span>
+            <div class="size-options">
+              <button type="button" class="size-btn" data-size="S" data-price="20000">S</button>
+              <button type="button" class="size-btn is-active" data-size="M" data-price="30000">M</button>
+              <button type="button" class="size-btn" data-size="L" data-price="40000">L</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-item group bg-surface-container-low rounded-2xl border border-outline-variant overflow-hidden shadow-sm hover:shadow-md hover:-translate-y-1 transition-all" data-cat="matcha" data-name="Matcha đậu đỏ kem cheese full">
+        <div class="aspect-[5/4] overflow-hidden bg-secondary-container/40">
+          <img loading="lazy" alt="" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://images.unsplash.com/photo-1582785513054-8d1bf9d69c1a?auto=format&fit=crop&w=600&q=80"/>
+        </div>
+        <div class="p-md text-center">
+          <h4 class="font-headline-md text-[20px] text-on-surface mb-xs">Matcha Đậu Đỏ Kem Cheese</h4>
+          <p class="text-on-surface-variant text-sm mb-md">Matcha + đậu đỏ + kem cheese trọn vị thượng hạng.</p>
+          <div class="size-selector" data-color="secondary">
+            <span class="size-price font-headline-md text-[22px] text-secondary font-bold">35.000đ</span>
+            <div class="size-options">
+              <button type="button" class="size-btn" data-size="S" data-price="25000">S</button>
+              <button type="button" class="size-btn is-active" data-size="M" data-price="35000">M</button>
+              <button type="button" class="size-btn" data-size="L" data-price="45000">L</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ Section: Trà Trái Cây ════ -->
+  <section class="menu-section mb-xl" data-section="tra-trai-cay">
+    <div class="flex items-center gap-sm mb-md">
+      <div class="w-2 h-8 bg-tertiary rounded-full"></div>
+      <h3 class="font-headline-lg text-headline-lg text-on-surface">🍋 Trà Trái Cây</h3>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-md">
+      <div class="menu-item group bg-surface-container-low rounded-2xl border border-outline-variant overflow-hidden shadow-sm hover:shadow-md hover:-translate-y-1 transition-all" data-cat="tra-trai-cay" data-name="Trà chanh nước hoa lemon flower">
+        <div class="aspect-[5/4] overflow-hidden bg-tertiary-fixed/40">
+          <img loading="lazy" alt="" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://images.unsplash.com/photo-1556679343-c7306c1976bc?auto=format&fit=crop&w=600&q=80"/>
+        </div>
+        <div class="p-md text-center">
+          <h4 class="font-headline-md text-[20px] text-on-surface mb-xs">Trà Chanh Nước Hoa</h4>
+          <p class="text-on-surface-variant text-sm mb-md">Chanh tươi ướp tinh dầu hoa thơm dịu thanh mát.</p>
+          <div class="size-selector" data-color="tertiary">
+            <span class="size-price font-headline-md text-[22px] text-tertiary font-bold">20.000đ</span>
+            <div class="size-options">
+              <button type="button" class="size-btn is-active" data-size="M" data-price="20000">M</button>
+              <button type="button" class="size-btn" data-size="L" data-price="30000">L</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-item group bg-surface-container-low rounded-2xl border border-outline-variant overflow-hidden shadow-sm hover:shadow-md hover:-translate-y-1 transition-all" data-cat="tra-trai-cay" data-name="Trà chanh muối hồng pink salt">
+        <div class="aspect-[5/4] overflow-hidden bg-tertiary-fixed/40">
+          <img loading="lazy" alt="" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://images.unsplash.com/photo-1470752354724-60a1d2b1907f?auto=format&fit=crop&w=600&q=80"/>
+        </div>
+        <div class="p-md text-center">
+          <h4 class="font-headline-md text-[20px] text-on-surface mb-xs">Trà Chanh Muối Hồng</h4>
+          <p class="text-on-surface-variant text-sm mb-md">Chanh muối hồng Himalaya, vị mặn ngọt cân bằng.</p>
+          <div class="size-selector" data-color="tertiary">
+            <span class="size-price font-headline-md text-[22px] text-tertiary font-bold">20.000đ</span>
+            <div class="size-options">
+              <button type="button" class="size-btn is-active" data-size="M" data-price="20000">M</button>
+              <button type="button" class="size-btn" data-size="L" data-price="30000">L</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ Section: Trà Kombucha ════ -->
+  <section class="menu-section mb-xl" data-section="tra-kombucha">
+    <div class="flex items-center gap-sm mb-md">
+      <div class="w-2 h-8 bg-secondary rounded-full"></div>
+      <h3 class="font-headline-lg text-headline-lg text-on-surface">🥤 Trà Kombucha</h3>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-md">
+      <div class="menu-item group bg-surface-container-low rounded-2xl border border-outline-variant overflow-hidden shadow-sm hover:shadow-md hover:-translate-y-1 transition-all" data-cat="tra-kombucha" data-name="Trà kombucha vải lychee">
+        <div class="aspect-[5/4] overflow-hidden bg-secondary-container/40">
+          <img loading="lazy" alt="" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://images.unsplash.com/photo-1638747022881-be7687fa9053?auto=format&fit=crop&w=600&q=80"/>
+        </div>
+        <div class="p-md text-center">
+          <h4 class="font-headline-md text-[20px] text-on-surface mb-xs">Trà Kombucha Vải</h4>
+          <p class="text-on-surface-variant text-sm mb-md">Lên men với vải mọng nước, vị ngọt thanh sảng khoái.</p>
+          <div class="size-selector" data-color="secondary">
+            <span class="size-price font-headline-md text-[22px] text-secondary font-bold">20.000đ</span>
+            <div class="size-options">
+              <button type="button" class="size-btn is-active" data-size="M" data-price="20000">M</button>
+              <button type="button" class="size-btn" data-size="L" data-price="30000">L</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-item group bg-surface-container-low rounded-2xl border border-outline-variant overflow-hidden shadow-sm hover:shadow-md hover:-translate-y-1 transition-all" data-cat="tra-kombucha" data-name="Trà kombucha nhiệt đới tropical">
+        <div class="aspect-[5/4] overflow-hidden bg-secondary-container/40">
+          <img loading="lazy" alt="" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://images.unsplash.com/photo-1625495124486-90b615c616a7?auto=format&fit=crop&w=600&q=80"/>
+        </div>
+        <div class="p-md text-center">
+          <h4 class="font-headline-md text-[20px] text-on-surface mb-xs">Trà Kombucha Nhiệt Đới</h4>
+          <p class="text-on-surface-variant text-sm mb-md">Trái cây nhiệt đới hoà quyện men trà tốt cho sức khoẻ.</p>
+          <div class="size-selector" data-color="secondary">
+            <span class="size-price font-headline-md text-[22px] text-secondary font-bold">20.000đ</span>
+            <div class="size-options">
+              <button type="button" class="size-btn is-active" data-size="M" data-price="20000">M</button>
+              <button type="button" class="size-btn" data-size="L" data-price="30000">L</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ Section: Cà Phê ════ -->
+  <section class="menu-section mb-xl" data-section="ca-phe">
+    <div class="flex items-center gap-sm mb-md">
+      <div class="w-2 h-8 bg-on-surface rounded-full"></div>
+      <h3 class="font-headline-lg text-headline-lg text-on-surface">☕ Cà Phê</h3>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-md">
+      <div class="menu-item group bg-surface-container-low rounded-2xl border border-outline-variant overflow-hidden shadow-sm hover:shadow-md hover:-translate-y-1 transition-all" data-cat="ca-phe" data-name="Đen đá cà phê black ice coffee">
+        <div class="aspect-[5/4] overflow-hidden bg-on-surface/10">
+          <img loading="lazy" alt="" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://images.unsplash.com/photo-1558722141-76ef6ca013be?auto=format&fit=crop&w=600&q=80"/>
+        </div>
+        <div class="p-md text-center">
+          <h4 class="font-headline-md text-[20px] text-on-surface mb-xs">Đen Đá</h4>
+          <p class="text-on-surface-variant text-sm mb-md">Cà phê đen đậm đà, đắng nhẹ hậu ngọt.</p>
+          <span class="font-headline-md text-[22px] text-on-surface font-bold">15.000đ</span>
+        </div>
+      </div>
+
+      <div class="menu-item group bg-surface-container-low rounded-2xl border border-outline-variant overflow-hidden shadow-sm hover:shadow-md hover:-translate-y-1 transition-all" data-cat="ca-phe" data-name="Nâu đá cà phê sữa brown ice coffee">
+        <div class="aspect-[5/4] overflow-hidden bg-on-surface/10">
+          <img loading="lazy" alt="" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://images.unsplash.com/photo-1569315095807-995e6e3ba320?auto=format&fit=crop&w=600&q=80"/>
+        </div>
+        <div class="p-md text-center">
+          <h4 class="font-headline-md text-[20px] text-on-surface mb-xs">Nâu Đá</h4>
+          <p class="text-on-surface-variant text-sm mb-md">Cà phê pha sữa đặc, béo ngậy truyền thống.</p>
+          <span class="font-headline-md text-[22px] text-on-surface font-bold">20.000đ</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ Section: Special ════ -->
+  <section class="menu-section mb-xl" data-section="special">
+    <div class="flex items-center gap-sm mb-md">
+      <div class="w-2 h-8 bg-primary rounded-full"></div>
+      <h3 class="font-headline-lg text-headline-lg text-on-surface">⭐ Special</h3>
+      <span class="ml-auto text-primary text-sm font-bold hidden md:inline">Phiên bản giới hạn</span>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-md">
+      <div class="menu-item group relative bg-gradient-to-br from-primary-container to-tertiary-fixed rounded-2xl border-2 border-primary/40 overflow-hidden shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all" data-cat="special" data-name="Trà ô long sen vàng kem cheese oolong lotus">
+        <span class="absolute top-3 right-3 z-10 bg-primary text-on-primary text-[10px] font-bold px-3 py-1 rounded-full">SIGNATURE</span>
+        <div class="aspect-[5/4] overflow-hidden">
+          <img loading="lazy" alt="" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://images.unsplash.com/photo-1627894006066-b45786537103?auto=format&fit=crop&w=600&q=80"/>
+        </div>
+        <div class="p-md text-center bg-surface/80 backdrop-blur-sm">
+          <h4 class="font-headline-md text-[20px] text-on-surface mb-xs">Trà Ô Long Sen Vàng Kem Cheese</h4>
+          <p class="text-on-surface-variant text-sm mb-md">Ô long quý hoà quyện sen vàng và kem cheese trọn vị.</p>
+          <div class="size-selector" data-color="primary">
+            <span class="size-price font-headline-md text-[22px] text-primary font-bold">25.000đ</span>
+            <div class="size-options">
+              <button type="button" class="size-btn is-active" data-size="M" data-price="25000">M</button>
+              <button type="button" class="size-btn" data-size="L" data-price="35000">L</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ Section: Kem ════ -->
+  <section class="menu-section mb-xl" data-section="kem">
+    <div class="flex items-center gap-sm mb-md">
+      <div class="w-2 h-8 bg-tertiary rounded-full"></div>
+      <h3 class="font-headline-lg text-headline-lg text-on-surface">🍦 Kem</h3>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-md">
+      <div class="menu-item group bg-surface-container-low rounded-2xl border border-outline-variant overflow-hidden shadow-sm hover:shadow-md hover:-translate-y-1 transition-all" data-cat="kem" data-name="Kem vani ốc quế vanilla cone">
+        <div class="aspect-[5/4] overflow-hidden bg-tertiary-fixed/40">
+          <img loading="lazy" alt="" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://images.unsplash.com/photo-1477505982272-ead89926a577?auto=format&fit=crop&w=600&q=80"/>
+        </div>
+        <div class="p-md text-center">
+          <h4 class="font-headline-md text-[20px] text-on-surface mb-xs">Kem Vani Ốc Quế</h4>
+          <p class="text-on-surface-variant text-sm mb-md">Kem vani béo ngậy trên bánh ốc quế giòn rụm.</p>
+          <span class="font-headline-md text-[22px] text-tertiary font-bold">10.000đ</span>
+        </div>
+      </div>
+
+      <div class="menu-item group bg-surface-container-low rounded-2xl border border-outline-variant overflow-hidden shadow-sm hover:shadow-md hover:-translate-y-1 transition-all" data-cat="kem" data-name="Vani cốc vanilla cup">
+        <div class="aspect-[5/4] overflow-hidden bg-tertiary-fixed/40">
+          <img loading="lazy" alt="" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://images.unsplash.com/photo-1614014077943-840960ce6694?auto=format&fit=crop&w=600&q=80"/>
+        </div>
+        <div class="p-md text-center">
+          <h4 class="font-headline-md text-[20px] text-on-surface mb-xs">Vani Cốc</h4>
+          <p class="text-on-surface-variant text-sm mb-md">Kem vani truyền thống đựng trong cốc, tiện lợi mang đi.</p>
+          <span class="font-headline-md text-[22px] text-tertiary font-bold">10.000đ</span>
+        </div>
+      </div>
+
+      <div class="menu-item group bg-surface-container-low rounded-2xl border border-outline-variant overflow-hidden shadow-sm hover:shadow-md hover:-translate-y-1 transition-all" data-cat="kem" data-name="Kem vani mix sốt trái cây fruit">
+        <div class="aspect-[5/4] overflow-hidden bg-tertiary-fixed/40">
+          <img loading="lazy" alt="" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://images.unsplash.com/photo-1505616485412-adfcd5561e31?auto=format&fit=crop&w=600&q=80"/>
+        </div>
+        <div class="p-md text-center">
+          <h4 class="font-headline-md text-[20px] text-on-surface mb-xs">Kem Vani Mix Sốt Trái Cây</h4>
+          <p class="text-on-surface-variant text-sm mb-md">Kem vani phủ sốt trái cây tươi chua ngọt hấp dẫn.</p>
+          <span class="font-headline-md text-[22px] text-tertiary font-bold">20.000đ</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  </div><!-- /menu-root -->
+</main>
+
+<div id="site-footer"></div>
+<script src="assets/js/layout.js"></script>
+<script>
+  // ── Menu search + filter ──
+  (function () {
+    const root = document.getElementById('menu-root');
+    const searchInput = document.getElementById('menu-search');
+    const clearBtn = document.getElementById('menu-search-clear');
+    const chips = document.querySelectorAll('#menu-filters .chip');
+    const items = root.querySelectorAll('.menu-item');
+    const sections = root.querySelectorAll('.menu-section');
+    const emptyState = document.getElementById('empty-state');
+
+    let activeCat = 'all';
+    let query = '';
+
+    function normalize(s) {
+      return (s || '')
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/[̀-ͯ]/g, '')
+        .replace(/đ/g, 'd');
+    }
+
+    function apply() {
+      const q = normalize(query.trim());
+      let total = 0;
+
+      items.forEach(item => {
+        const cats = (item.dataset.cat || '').split(/\s+/);
+        const name = normalize(item.dataset.name || '');
+        const matchCat = activeCat === 'all' || cats.includes(activeCat);
+        const matchQuery = !q || name.includes(q);
+        const visible = matchCat && matchQuery;
+        item.classList.toggle('is-hidden', !visible);
+        if (visible) total++;
+      });
+
+      sections.forEach(section => {
+        const visibleItems = section.querySelectorAll('.menu-item:not(.is-hidden)');
+        section.classList.toggle('is-empty', visibleItems.length === 0);
+      });
+
+      emptyState.classList.toggle('hidden', total > 0);
+      if (q === '') {
+        clearBtn.classList.add('hidden');
+        clearBtn.classList.remove('flex');
+      } else {
+        clearBtn.classList.remove('hidden');
+        clearBtn.classList.add('flex');
+      }
+    }
+
+    chips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        chips.forEach(c => c.classList.remove('chip-active'));
+        chip.classList.add('chip-active');
+        activeCat = chip.dataset.cat;
+        apply();
+      });
+    });
+
+    searchInput.addEventListener('input', e => {
+      query = e.target.value;
+      apply();
+    });
+
+    clearBtn.addEventListener('click', () => {
+      searchInput.value = '';
+      query = '';
+      apply();
+      searchInput.focus();
+    });
+  })();
+</script>
+</body>
+</html>

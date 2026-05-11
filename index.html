@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html class="light" lang="vi">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>EGG TEA - Trà sữa thủ công Việt Nam</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script src="assets/js/tailwind.config.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@100;300;400;600;700;800;900&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="assets/css/main.css" rel="stylesheet"/>
+<link rel="icon" type="image/png" href="./assets/img/favicon-egg-tea.png">
+<style>
+  .font-serif-accent { font-family: 'Playfair Display', serif; font-style: italic; font-weight: 500; }
+</style>
+</head>
+<body class="bg-surface text-on-surface" data-page="home">
+<div id="site-header"></div>
+
+<main>
+
+<!-- ════════════════════════════════════════════════════════════════
+     HERO — soft cream gradient + layered organic ornaments
+     ════════════════════════════════════════════════════════════════ -->
+<section class="relative overflow-hidden bg-gradient-to-b from-surface-container-low via-surface to-surface">
+  <!-- Background ornaments -->
+  <div class="absolute inset-0 -z-10 pointer-events-none">
+    <!-- Soft gradient washes -->
+    <div class="absolute -top-32 -right-32 w-[640px] h-[640px] rounded-full bg-gradient-to-br from-primary-fixed/60 to-transparent blur-3xl"></div>
+    <div class="absolute -bottom-40 -left-32 w-[520px] h-[520px] rounded-full bg-gradient-to-tr from-secondary-container/50 to-transparent blur-3xl"></div>
+    <div class="absolute top-1/2 right-1/4 w-[280px] h-[280px] rounded-full bg-tertiary-fixed/30 blur-3xl"></div>
+    <!-- Dotted texture -->
+    <div class="absolute inset-0 dotted-divider opacity-30"></div>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-gutter pt-6 pb-12 md:pt-8 md:pb-20 grid grid-cols-1 lg:grid-cols-12 gap-lg items-center">
+    <!-- Left: copy -->
+    <div class="lg:col-span-7 space-y-md fade-up">
+      <h1 class="font-display-lg text-[clamp(40px,5.2vw,68px)] leading-[1.08] text-on-surface tracking-tight">
+        Trà sữa <span class="font-serif-accent text-secondary">tự nhiên</span>,<br/>
+        thanh mát <span class="text-tertiary">trọn vị Việt</span>
+      </h1>
+
+      <p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl">
+        Mỗi giọt trà bắt đầu từ những đồi chè cao nguyên, kết tinh cùng trái cây tươi và bí quyết thủ công của người Việt — một ly cho ngày hè trọn vẹn.
+      </p>
+
+      <div class="flex flex-wrap gap-sm pt-2">
+        <a href="thuc-don.html" class="border-2 border-on-surface/15 bg-white/60 backdrop-blur text-on-surface px-7 py-4 rounded-full font-bold inline-flex items-center gap-2 hover:border-primary hover:text-primary transition-all">
+          <span class="material-symbols-outlined">restaurant_menu</span>
+          Xem thực đơn
+        </a>
+      </div>
+
+      <!-- Inline stats -->
+      <div class="grid grid-cols-3 gap-sm pt-lg max-w-xl">
+        <div>
+          <div class="font-display-lg text-[32px] text-primary leading-none">2</div>
+          <p class="font-label-sm text-label-sm text-on-surface-variant mt-1">Cửa hàng tại Nam Định</p>
+        </div>
+        <div class="border-l border-outline-variant/40 pl-sm">
+          <div class="font-display-lg text-[32px] text-primary leading-none">100%</div>
+          <p class="font-label-sm text-label-sm text-on-surface-variant mt-1">Nguyên liệu tự nhiên</p>
+        </div>
+        <div class="border-l border-outline-variant/40 pl-sm">
+          <div class="font-display-lg text-[32px] text-primary leading-none flex items-baseline gap-1">4.9<span class="material-symbols-outlined text-primary-container text-[24px]" style="font-variation-settings:'FILL' 1;">star</span></div>
+          <p class="font-label-sm text-label-sm text-on-surface-variant mt-1">Đánh giá khách hàng</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: hero image stage -->
+    <div class="lg:col-span-5 relative h-[340px] sm:h-[420px] md:h-[620px] fade-up delay-2">
+      <!-- Background ring (slow pulse) -->
+      <div class="absolute inset-0 flex items-center justify-center">
+        <div class="w-[90%] aspect-square rounded-full bg-gradient-to-br from-primary-fixed via-white to-secondary-container/50 shadow-2xl anim-hero-pulse"></div>
+      </div>
+      <!-- HERO SLIDER - 3 ảnh sản phẩm Egg Tea -->
+      <div id="hero-slider" class="hero-slider z-10">
+        <div class="hero-slide" data-state="active">
+          <img alt="Trà sữa Egg Tea 1" class="cup-solo" src="anh1.png"/>
+        </div>
+        <div class="hero-slide" data-state="upcoming">
+          <img alt="Trà sữa Egg Tea 2" class="cup-solo" src="anh2.png" style="width:92%;max-width:500px;"/>
+        </div>
+        <div class="hero-slide" data-state="upcoming">
+          <img alt="Trà sữa Egg Tea 3" class="cup-solo" src="anh3.png?v=2"/>
+        </div>
+      </div>
+
+      <!-- Pagination dots -->
+      <div id="hero-slider-dots" class="hero-slider-dots absolute bottom-3 left-1/2 -translate-x-1/2 z-30">
+        <button class="hero-slider-dot active" data-slide="0" aria-label="Sản phẩm 1"></button>
+        <button class="hero-slider-dot"        data-slide="1" aria-label="Sản phẩm 2"></button>
+        <button class="hero-slider-dot"        data-slide="2" aria-label="Sản phẩm 3"></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll cue -->
+  <div class="absolute left-1/2 -translate-x-1/2 bottom-6 hidden md:flex flex-col items-center gap-1 text-on-surface-variant animate-bounce">
+    <span class="text-[10px] tracking-widest uppercase">Scroll</span>
+    <span class="material-symbols-outlined">expand_more</span>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════
+     MARQUEE — values strip
+     ════════════════════════════════════════════════════════════════ -->
+<section class="border-y border-outline-variant/30 bg-surface-container-low py-4">
+  <div class="marquee text-primary font-bold tracking-widest text-[14px] uppercase">
+    <div class="marquee__track">
+      <span class="flex items-center gap-3"><span class="material-symbols-outlined text-secondary">eco</span> 100% Nguyên liệu tự nhiên</span>
+      <span class="opacity-30">★</span>
+      <span class="flex items-center gap-3"><span class="material-symbols-outlined text-secondary">local_cafe</span> Pha chế thủ công mỗi ngày</span>
+      <span class="opacity-30">★</span>
+      <span class="flex items-center gap-3"><span class="material-symbols-outlined text-secondary">spa</span> Trà thượng hạng</span>
+      <span class="opacity-30">★</span>
+      <span class="flex items-center gap-3"><span class="material-symbols-outlined text-secondary">favorite</span> Ít đường, tốt sức khoẻ</span>
+      <span class="opacity-30">★</span>
+      <span class="flex items-center gap-3"><span class="material-symbols-outlined text-secondary">verified</span> Cam kết tươi mới</span>
+      <span class="opacity-30">★</span>
+    </div>
+    <div class="marquee__track" aria-hidden="true">
+      <span class="flex items-center gap-3"><span class="material-symbols-outlined text-secondary">eco</span> 100% Nguyên liệu tự nhiên</span>
+      <span class="opacity-30">★</span>
+      <span class="flex items-center gap-3"><span class="material-symbols-outlined text-secondary">local_cafe</span> Pha chế thủ công mỗi ngày</span>
+      <span class="opacity-30">★</span>
+      <span class="flex items-center gap-3"><span class="material-symbols-outlined text-secondary">spa</span> Trà thượng hạng</span>
+      <span class="opacity-30">★</span>
+      <span class="flex items-center gap-3"><span class="material-symbols-outlined text-secondary">favorite</span> Ít đường, tốt sức khoẻ</span>
+      <span class="opacity-30">★</span>
+      <span class="flex items-center gap-3"><span class="material-symbols-outlined text-secondary">verified</span> Cam kết tươi mới</span>
+      <span class="opacity-30">★</span>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════
+     BESTSELLERS — đồng bộ style với trang Thực đơn
+     ════════════════════════════════════════════════════════════════ -->
+<section class="max-w-7xl mx-auto px-gutter py-xl">
+  <div class="flex items-end justify-between mb-lg">
+    <div>
+      <span class="eyebrow">Top bán chạy</span>
+      <h2 class="font-display-lg text-headline-lg text-on-surface mt-2">Khách hàng yêu thích nhất</h2>
+    </div>
+    <a href="thuc-don.html" class="hidden md:inline-flex items-center gap-1 text-primary font-bold hover:gap-2 transition-all">
+      Xem toàn bộ <span class="material-symbols-outlined">arrow_forward</span>
+    </a>
+  </div>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-md">
+    <!-- Product 1 -->
+    <div class="group bg-surface-container-low rounded-2xl border border-outline-variant overflow-hidden shadow-sm hover:shadow-md hover:-translate-y-1 transition-all">
+      <div class="aspect-[5/4] overflow-hidden bg-primary-fixed/30">
+        <img loading="lazy" alt="Nhài Sữa Sốt Xoài" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://images.unsplash.com/photo-1639927663411-35f23bb792b7?auto=format&fit=crop&w=600&q=80"/>
+      </div>
+      <div class="p-md text-center">
+        <h4 class="font-headline-md text-[20px] text-on-surface mb-xs">Nhài Sữa Sốt Xoài</h4>
+        <p class="text-on-surface-variant text-sm mb-md">Xoài chín ngọt ngào tự nhiên, hoà quyện trà nhài thanh tao.</p>
+        <div class="size-selector" data-color="primary">
+          <span class="size-price font-headline-md text-[22px] text-primary font-bold">25.000đ</span>
+          <div class="size-options">
+            <button type="button" class="size-btn" data-size="S" data-price="15000">S</button>
+            <button type="button" class="size-btn is-active" data-size="M" data-price="25000">M</button>
+            <button type="button" class="size-btn" data-size="L" data-price="35000">L</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Product 2 -->
+    <div class="group bg-surface-container-low rounded-2xl border border-outline-variant overflow-hidden shadow-sm hover:shadow-md hover:-translate-y-1 transition-all">
+      <div class="aspect-[5/4] overflow-hidden bg-primary-fixed/30">
+        <img loading="lazy" alt="Nhài Sữa Sốt Dâu Tây" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://images.unsplash.com/photo-1647201201594-dff923210b3a?auto=format&fit=crop&w=600&q=80"/>
+      </div>
+      <div class="p-md text-center">
+        <h4 class="font-headline-md text-[20px] text-on-surface mb-xs">Nhài Sữa Sốt Dâu Tây</h4>
+        <p class="text-on-surface-variant text-sm mb-md">Dâu tây tươi ngon thơm mát, chua ngọt dịu dàng.</p>
+        <div class="size-selector" data-color="primary">
+          <span class="size-price font-headline-md text-[22px] text-primary font-bold">25.000đ</span>
+          <div class="size-options">
+            <button type="button" class="size-btn" data-size="S" data-price="15000">S</button>
+            <button type="button" class="size-btn is-active" data-size="M" data-price="25000">M</button>
+            <button type="button" class="size-btn" data-size="L" data-price="35000">L</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Product 3 -->
+    <div class="group bg-surface-container-low rounded-2xl border border-outline-variant overflow-hidden shadow-sm hover:shadow-md hover:-translate-y-1 transition-all">
+      <div class="aspect-[5/4] overflow-hidden bg-primary-fixed/30">
+        <img loading="lazy" alt="Nhài Sữa Sốt Chanh Leo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://images.unsplash.com/photo-1647211429106-ce68340e846a?auto=format&fit=crop&w=600&q=80"/>
+      </div>
+      <div class="p-md text-center">
+        <h4 class="font-headline-md text-[20px] text-on-surface mb-xs">Nhài Sữa Sốt Chanh Leo</h4>
+        <p class="text-on-surface-variant text-sm mb-md">Chanh leo chua thanh giàu vitamin, sảng khoái tức thì.</p>
+        <div class="size-selector" data-color="primary">
+          <span class="size-price font-headline-md text-[22px] text-primary font-bold">25.000đ</span>
+          <div class="size-options">
+            <button type="button" class="size-btn" data-size="S" data-price="15000">S</button>
+            <button type="button" class="size-btn is-active" data-size="M" data-price="25000">M</button>
+            <button type="button" class="size-btn" data-size="L" data-price="35000">L</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════
+     FEATURED — magazine-style split with bento accents
+     ════════════════════════════════════════════════════════════════ -->
+<section class="relative bg-surface-container-low py-xl overflow-hidden">
+  <div class="absolute inset-y-0 left-0 w-1/2 bg-secondary-container/20 hidden lg:block"></div>
+  <div class="max-w-7xl mx-auto px-gutter relative">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-lg items-center">
+      <!-- Image collage -->
+      <div class="lg:col-span-7 relative h-[380px] sm:h-[460px] md:h-[520px]">
+        <div class="absolute top-0 left-0 w-3/4 h-2/3 rounded-[2rem] overflow-hidden shadow-2xl">
+          <img alt="Bộ sưu tập Kombucha" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1iNXw737kb21oezxbRodvg7lTsGtPdP3empJAJiaVBTWWDqGrGU2UOCNHIAltjdGo--T1ces_6lOLbFj8vRPCYmlIJMnXeiso_bt4fHGjS5sQMEmF1uBTIoHj-GxoTLtYkFqf2hZO25oaz0Zyco1-ZzqtEwd200ENY14bIG42aTfMHM922e332qFlQUSE9zZdkoJkVyLeGsmRneyBLCGNyNIQ8-UWhLO0JRIO-F0jiw0hAetrOTkx5xZ8IzZFX8wyg7MdZ_xk3D1c"/>
+        </div>
+        <div class="absolute bottom-0 right-0 w-2/3 h-1/2 rounded-[2rem] overflow-hidden shadow-2xl border-8 border-surface-container-low">
+          <img alt="Trái cây tươi" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuByv1gebfmMMDe_bRvAAvPRLqposVYPLYP-GdvDJKBIOJ9UL71wg8rChPmsetRwgD0oDQyCifDeCIGpZPXPz3vhSznkFg6r2ICzNbT16IQDNiSY0UYcOXvr0AuGpsm3-XDgQW7OrcLY43Haaw08rSNBK-ocQDZEjCzxe_lCMBaf-CwELd8tPnZgnXn6npuznFjig9gGsCWTG8-v9glKERR2wpukhenp9g4Oe8eEuw0K0NGviFiNaa2PHbEL6vE3WJMUJLzv8eWAYEno"/>
+        </div>
+        <!-- Floating quote card -->
+        <div class="absolute top-1/2 right-4 md:right-12 bg-white p-4 rounded-2xl shadow-xl border border-outline-variant/30 max-w-[220px] -rotate-3 z-10">
+          <div class="flex gap-1 text-primary-container mb-1">
+            <span class="material-symbols-outlined text-[18px]" style="font-variation-settings:'FILL' 1;">star</span>
+            <span class="material-symbols-outlined text-[18px]" style="font-variation-settings:'FILL' 1;">star</span>
+            <span class="material-symbols-outlined text-[18px]" style="font-variation-settings:'FILL' 1;">star</span>
+            <span class="material-symbols-outlined text-[18px]" style="font-variation-settings:'FILL' 1;">star</span>
+            <span class="material-symbols-outlined text-[18px]" style="font-variation-settings:'FILL' 1;">star</span>
+          </div>
+          <p class="text-sm leading-snug">"Vị xoài chín tự nhiên, không gắt như mấy chỗ khác. Sẽ quay lại!"</p>
+          <p class="text-[11px] text-on-surface-variant mt-1">— Lan Anh, Nam Định</p>
+        </div>
+      </div>
+
+      <!-- Copy -->
+      <div class="lg:col-span-5 space-y-md">
+        <span class="eyebrow">Sản phẩm tháng này</span>
+        <h2 class="font-display-lg text-[clamp(36px,4vw,56px)] leading-tight text-on-surface">
+          <span class="font-serif-accent text-secondary">Kombucha</span> mùa hè<br/>
+          <span class="text-primary">đánh thức</span> giác quan
+        </h2>
+        <p class="font-body-lg text-body-lg text-on-surface-variant">
+          Bộ sưu tập trà lên men 6 hương vị, chứa lợi khuẩn tự nhiên hỗ trợ tiêu hoá — sảng khoái, ít calo, hợp khẩu vị Việt.
+        </p>
+        <ul class="space-y-sm">
+          <li class="flex items-start gap-3">
+            <span class="material-symbols-outlined text-secondary mt-0.5" style="font-variation-settings:'FILL' 1;">check_circle</span>
+            <span class="font-body-md text-body-md">Lên men 14 ngày trong tank inox cao cấp</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="material-symbols-outlined text-secondary mt-0.5" style="font-variation-settings:'FILL' 1;">check_circle</span>
+            <span class="font-body-md text-body-md">Chứa probiotic tự nhiên, không cồn</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="material-symbols-outlined text-secondary mt-0.5" style="font-variation-settings:'FILL' 1;">check_circle</span>
+            <span class="font-body-md text-body-md">Đường ăn kiêng, dưới 50 kcal/chai</span>
+          </li>
+        </ul>
+        <div class="flex gap-sm pt-2">
+          <a href="thuc-don.html" class="bg-secondary text-on-secondary px-7 py-3 rounded-full font-bold inline-flex items-center gap-2 hover:bg-secondary/90 transition-all">
+            Khám phá bộ sưu tập
+            <span class="material-symbols-outlined">arrow_outward</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════
+     PROMOTION SPLIT
+     ════════════════════════════════════════════════════════════════ -->
+<section class="max-w-7xl mx-auto px-gutter py-xl">
+  <div class="bg-gradient-to-br from-on-surface via-on-surface to-on-surface/90 rounded-[3rem] overflow-hidden relative grid grid-cols-1 lg:grid-cols-2 items-center">
+    <div class="p-lg lg:p-xl text-white relative z-10">
+      <span class="inline-flex items-center gap-2 bg-primary text-on-primary backdrop-blur px-4 py-1.5 rounded-full font-label-sm text-label-sm">
+        <span class="material-symbols-outlined text-[16px]">local_fire_department</span>
+        ƯU ĐÃI THÁNG 5
+      </span>
+      <h2 class="font-display-lg text-[clamp(36px,5vw,64px)] leading-tight mt-md">
+        Mua 1 <span class="font-serif-accent text-primary">tặng 1</span><br/>
+        Trà sữa truyền thống
+      </h2>
+      <p class="font-body-lg text-body-lg text-white/80 mt-md max-w-md">
+        Áp dụng từ ngày 1/5 đến 3/5 từ 10:00 — 11:00 & 17:00 - 18:00 tại tất cả các cửa hàng. Mã đơn hàng đầu tiên giảm thêm 20%.
+      </p>
+      <div class="flex flex-wrap gap-sm mt-lg">
+        <a href="chi-tiet-khuyen-mai.html" class="bg-primary text-on-primary font-bold px-7 py-3 rounded-full inline-flex items-center gap-2 hover:bg-primary-container transition-colors">
+          Xem chi tiết khuyến mãi
+          <span class="material-symbols-outlined">arrow_forward</span>
+        </a>
+      </div>
+    </div>
+    <div class="relative h-[320px] lg:h-[480px]">
+      <img class="absolute inset-0 w-full h-full object-cover" alt="Matcha Sen Dừa" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBbw8sxMkQAZeLJ0Yg0CA5A7Q_uc8y_deets_SZs3MPzbIOLLuGVrNZv9wyKrhAfIbj4C55zOBzJVZ0fxKJGiuGseGCAnCW82zU_7wr-xDnShhANqsq2xm9WNj07nwMcoxkCqSjqWquXXI2HoC5AkhiB28s-nPY_Pjp8Po6AKyng0mw1POaEPyCrpxY9cW9Hljeng0Mnk5cOFWw7rxoL6JrPfZZlihOID5SA6gozEyh9QQwqcL7tXC96vCjvg-HxEgfJYQRfci6xmVT"/>
+      <div class="absolute inset-0 bg-gradient-to-r from-on-surface lg:to-transparent to-on-surface/30"></div>
+    </div>
+    <!-- Decorative -->
+    <div class="absolute -top-20 -right-20 w-72 h-72 bg-primary/30 rounded-full blob"></div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════
+     VALUES — 3 columns
+     ════════════════════════════════════════════════════════════════ -->
+<section class="max-w-7xl mx-auto px-gutter py-xl">
+  <div class="text-center mb-lg">
+    <span class="eyebrow">Vì sao chọn Egg Tea</span>
+    <h2 class="font-display-lg text-headline-lg text-on-surface mt-2">Cam kết tươi ngon mỗi ngày</h2>
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-md">
+    <div class="group bg-surface-container-low rounded-3xl p-lg border border-outline-variant/20 hover:border-primary/40 hover:shadow-lg transition-all">
+      <div class="w-16 h-16 rounded-2xl bg-primary-container/20 text-primary flex items-center justify-center mb-md group-hover:rotate-6 transition-transform">
+        <span class="material-symbols-outlined text-[32px]" style="font-variation-settings:'FILL' 1;">eco</span>
+      </div>
+      <h3 class="font-headline-md text-[22px] text-on-surface mb-sm">100% Tự Nhiên</h3>
+      <p class="font-body-md text-body-md text-on-surface-variant">Không hương liệu nhân tạo, không phẩm màu, không chất bảo quản. Chỉ là trà, trái cây và sữa thật.</p>
+    </div>
+    <div class="group bg-surface-container-low rounded-3xl p-lg border border-outline-variant/20 hover:border-secondary/40 hover:shadow-lg transition-all">
+      <div class="w-16 h-16 rounded-2xl bg-secondary-container/40 text-secondary flex items-center justify-center mb-md group-hover:rotate-6 transition-transform">
+        <span class="material-symbols-outlined text-[32px]" style="font-variation-settings:'FILL' 1;">restaurant</span>
+      </div>
+      <h3 class="font-headline-md text-[22px] text-on-surface mb-sm">Chế biến trong ngày</h3>
+      <p class="font-body-md text-body-md text-on-surface-variant">Nguyên liệu tươi mới mỗi sáng, sấy nóng tại quầy. Trà thơm, sữa tươi 100%.</p>
+    </div>
+    <div class="group bg-surface-container-low rounded-3xl p-lg border border-outline-variant/20 hover:border-tertiary/40 hover:shadow-lg transition-all">
+      <div class="w-16 h-16 rounded-2xl bg-tertiary-container/40 text-tertiary flex items-center justify-center mb-md group-hover:rotate-6 transition-transform">
+        <span class="material-symbols-outlined text-[32px]" style="font-variation-settings:'FILL' 1;">health_and_safety</span>
+      </div>
+      <h3 class="font-headline-md text-[22px] text-on-surface mb-sm">Tốt cho sức khoẻ</h3>
+      <p class="font-body-md text-body-md text-on-surface-variant">Công thức ít đường tuỳ chọn, giàu lợi khuẩn từ Kombucha. Hợp khẩu vị Việt — không gắt, không ngọt gắt.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════
+     TESTIMONIALS
+     ════════════════════════════════════════════════════════════════ -->
+<section class="bg-surface-container-high py-xl">
+  <div class="max-w-7xl mx-auto px-gutter">
+    <div class="text-center mb-lg">
+      <span class="eyebrow">Khách hàng nói gì</span>
+      <h2 class="font-display-lg text-headline-lg text-on-surface mt-2">Hơn 50.000 ly mỗi tháng đến tay bạn</h2>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-md">
+      <figure class="bg-white rounded-3xl p-lg shadow-sm border border-outline-variant/20 relative">
+        <span class="absolute -top-4 left-lg w-12 h-12 bg-primary text-on-primary rounded-full flex items-center justify-center text-3xl font-serif-accent">"</span>
+        <div class="flex gap-1 text-primary-container mb-md">
+          <span class="material-symbols-outlined text-[20px]" style="font-variation-settings:'FILL' 1;">star</span>
+          <span class="material-symbols-outlined text-[20px]" style="font-variation-settings:'FILL' 1;">star</span>
+          <span class="material-symbols-outlined text-[20px]" style="font-variation-settings:'FILL' 1;">star</span>
+          <span class="material-symbols-outlined text-[20px]" style="font-variation-settings:'FILL' 1;">star</span>
+          <span class="material-symbols-outlined text-[20px]" style="font-variation-settings:'FILL' 1;">star</span>
+        </div>
+        <blockquote class="font-body-lg text-body-lg text-on-surface mb-lg leading-relaxed">
+          Trà sữa ngon thật sự, vị tự nhiên không gắt. Mình đã thử cả 5 vị premium và lần nào cũng ưng. Đặc biệt thích Sốt Xoài.
+        </blockquote>
+        <figcaption class="flex items-center gap-3">
+          <div class="w-12 h-12 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-bold text-lg">LA</div>
+          <div>
+            <p class="font-bold text-on-surface">Lan Anh</p>
+            <p class="text-sm text-on-surface-variant">Nam Định</p>
+          </div>
+        </figcaption>
+      </figure>
+      <figure class="bg-white rounded-3xl p-lg shadow-sm border border-outline-variant/20 relative md:translate-y-6">
+        <span class="absolute -top-4 left-lg w-12 h-12 bg-secondary text-on-secondary rounded-full flex items-center justify-center text-3xl font-serif-accent">"</span>
+        <div class="flex gap-1 text-primary-container mb-md">
+          <span class="material-symbols-outlined text-[20px]" style="font-variation-settings:'FILL' 1;">star</span>
+          <span class="material-symbols-outlined text-[20px]" style="font-variation-settings:'FILL' 1;">star</span>
+          <span class="material-symbols-outlined text-[20px]" style="font-variation-settings:'FILL' 1;">star</span>
+          <span class="material-symbols-outlined text-[20px]" style="font-variation-settings:'FILL' 1;">star</span>
+          <span class="material-symbols-outlined text-[20px]" style="font-variation-settings:'FILL' 1;">star</span>
+        </div>
+        <blockquote class="font-body-lg text-body-lg text-on-surface mb-lg leading-relaxed">
+          Kombucha của Egg Tea uống cuốn lắm! Vị chua nhẹ, lên men chuẩn. Mình hay đặt cho cả văn phòng — ai cũng thích.
+        </blockquote>
+        <figcaption class="flex items-center gap-3">
+          <div class="w-12 h-12 rounded-full bg-secondary text-on-secondary flex items-center justify-center font-bold text-lg">MH</div>
+          <div>
+            <p class="font-bold text-on-surface">Minh Hùng</p>
+            <p class="text-sm text-on-surface-variant">Nam Định</p>
+          </div>
+        </figcaption>
+      </figure>
+      <figure class="bg-white rounded-3xl p-lg shadow-sm border border-outline-variant/20 relative">
+        <span class="absolute -top-4 left-lg w-12 h-12 bg-tertiary text-white rounded-full flex items-center justify-center text-3xl font-serif-accent">"</span>
+        <div class="flex gap-1 text-primary-container mb-md">
+          <span class="material-symbols-outlined text-[20px]" style="font-variation-settings:'FILL' 1;">star</span>
+          <span class="material-symbols-outlined text-[20px]" style="font-variation-settings:'FILL' 1;">star</span>
+          <span class="material-symbols-outlined text-[20px]" style="font-variation-settings:'FILL' 1;">star</span>
+          <span class="material-symbols-outlined text-[20px]" style="font-variation-settings:'FILL' 1;">star</span>
+          <span class="material-symbols-outlined text-[20px]" style="font-variation-settings:'FILL' 1;">star_half</span>
+        </div>
+        <blockquote class="font-body-lg text-body-lg text-on-surface mb-lg leading-relaxed">
+          Cửa hàng ở 152 Hùng Vương không gian rất chill, nhân viên thân thiện. Trà sữa nướng kem chesse ngon — quá tuyệt vời, sẽ quay lại.
+        </blockquote>
+        <figcaption class="flex items-center gap-3">
+          <div class="w-12 h-12 rounded-full bg-tertiary text-white flex items-center justify-center font-bold text-lg">TT</div>
+          <div>
+            <p class="font-bold text-on-surface">Thuỳ Trang</p>
+            <p class="text-sm text-on-surface-variant">Hà Nội</p>
+          </div>
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<div id="site-footer"></div>
+<script src="assets/js/layout.js"></script>
+<script>
+  // ── Hero slider — auto-cycle 3 cup scenes ──
+  (function () {
+    const slider = document.getElementById('hero-slider');
+    const dotsBox = document.getElementById('hero-slider-dots');
+    if (!slider || !dotsBox) return;
+
+    const slides = Array.from(slider.querySelectorAll('.hero-slide'));
+    const dots = Array.from(dotsBox.querySelectorAll('.hero-slider-dot'));
+    const INTERVAL = 3000;
+    let current = 0;
+    let timer = null;
+
+    function show(i) {
+      const old = current;
+      if (old === i) return;
+
+      const oldEl = slides[old];
+      const newEl = slides[i];
+
+      // Snap incoming slide to "upcoming" (off-screen right) without animating
+      newEl.classList.add('no-trans');
+      newEl.dataset.state = 'upcoming';
+      void newEl.offsetWidth; // force reflow
+      newEl.classList.remove('no-trans');
+
+      // Trigger animations: old slides out left, new slides in from right
+      oldEl.dataset.state = 'leaving';
+      newEl.dataset.state = 'active';
+
+      // Reset other slides silently to upcoming
+      slides.forEach((s, idx) => {
+        if (idx !== i && idx !== old) {
+          s.classList.add('no-trans');
+          s.dataset.state = 'upcoming';
+          void s.offsetWidth;
+          s.classList.remove('no-trans');
+        }
+      });
+
+      dots.forEach((d, idx) => d.classList.toggle('active', idx === i));
+      current = i;
+    }
+
+    function next() { show((current + 1) % slides.length); }
+    function start() { stop(); timer = setInterval(next, INTERVAL); }
+    function stop() { if (timer) clearInterval(timer); }
+
+    dots.forEach((d, i) => d.addEventListener('click', () => { show(i); start(); }));
+    slider.addEventListener('mouseenter', stop);
+    slider.addEventListener('mouseleave', start);
+
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) start();
+  })();
+</script>
+</body>
+</html>
