@@ -1,7 +1,7 @@
 // Shared header + footer injection. Each page sets <body data-page="..."> to mark active nav.
 (function () {
   const NAV = [
-    { key: 'home', label: 'Trang chủ', href: 'index.html' },
+    { key: 'home', label: 'Trang chủ', href: './' },
     { key: 'menu', label: 'Thực đơn', href: 'thuc-don.html' },
     { key: 'story', label: 'Về chúng tôi', href: 'cau-chuyen.html' },
     { key: 'promo', label: 'Khuyến mãi', href: 'khuyen-mai.html' },
