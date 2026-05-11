@@ -28,7 +28,7 @@
     return `
       <header class="bg-surface/90 dark:bg-inverse-surface/90 backdrop-blur-md border-b border-outline-variant/30 shadow-sm sticky top-0 z-50">
         <div class="flex justify-between items-center px-gutter py-3 md:py-4 max-w-7xl mx-auto gap-2">
-          <a class="font-headline-lg text-xl sm:text-2xl md:text-headline-lg font-black tracking-tight text-primary" href="index.html">EGG TEA</a>
+          <a class="font-headline-lg text-xl sm:text-2xl md:text-headline-lg font-black tracking-tight text-primary" href="./">EGG TEA</a>
           <nav class="hidden md:flex gap-md items-center">${links}</nav>
           <div class="flex items-center gap-2">
             <div class="hidden md:flex items-center gap-2">
