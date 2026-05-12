@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# Block dev/asset noise from being indexed (optional)
+Disallow: /assets/js/
+
+Sitemap: https://eggtea.vn/sitemap.xml

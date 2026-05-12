@@ -1,0 +1,8 @@
+# Backup ảnh gốc trước khi nén (giữ local, không push)
+backup-original-images/
+
+# OS / editor
+Thumbs.db
+.DS_Store
+.vscode/
+.idea/

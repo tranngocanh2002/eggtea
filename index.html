@@ -3,7 +3,39 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>EGG TEA - Trà sữa thủ công Việt Nam</title>
+
+<title>Trà Sữa Egg Tea Nam Định — Thủ công, nguyên liệu tự nhiên</title>
+<meta name="description" content="Egg Tea — trà sữa thủ công Nam Định, nguyên liệu 100% tự nhiên, ít đường, pha chế mỗi ngày. 2 cơ sở: 152 Hùng Vương & 173 Trần Hưng Đạo. Xem thực đơn & ưu đãi ngay!"/>
+<meta name="keywords" content="trà sữa Nam Định, Egg Tea, trà sữa thủ công, trà sữa 152 Hùng Vương, trà sữa Trần Hưng Đạo Nam Định, kombucha Nam Định, trà sữa ngon Nam Định"/>
+<meta name="author" content="Egg Tea"/>
+<meta name="robots" content="index, follow, max-image-preview:large"/>
+<meta name="theme-color" content="#1F1B1B"/>
+<meta name="geo.region" content="VN-67"/>
+<meta name="geo.placename" content="Nam Định"/>
+
+<link rel="canonical" href="https://eggtea.vn/"/>
+
+<!-- Open Graph -->
+<meta property="og:type" content="website"/>
+<meta property="og:locale" content="vi_VN"/>
+<meta property="og:site_name" content="Egg Tea"/>
+<meta property="og:title" content="Trà Sữa Egg Tea Nam Định — Thủ công, nguyên liệu tự nhiên"/>
+<meta property="og:description" content="Trà sữa thủ công Nam Định, nguyên liệu 100% tự nhiên, ít đường. 2 cơ sở tại 152 Hùng Vương & 173 Trần Hưng Đạo."/>
+<meta property="og:url" content="https://eggtea.vn/"/>
+<meta property="og:image" content="https://eggtea.vn/anh1.png"/>
+<meta property="og:image:alt" content="Trà sữa Egg Tea Nam Định"/>
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Trà Sữa Egg Tea Nam Định — Thủ công, nguyên liệu tự nhiên"/>
+<meta name="twitter:description" content="Trà sữa thủ công Nam Định, nguyên liệu 100% tự nhiên. 2 cơ sở tại Nam Định."/>
+<meta name="twitter:image" content="https://eggtea.vn/anh1.png"/>
+
+<!-- Performance: preconnect to external origins -->
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link rel="preconnect" href="https://cdn.tailwindcss.com"/>
+
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <script src="assets/js/tailwind.config.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@100;300;400;600;700;800;900&display=swap" rel="stylesheet"/>
@@ -14,6 +46,82 @@
 <style>
   .font-serif-accent { font-family: 'Playfair Display', serif; font-style: italic; font-weight: 500; }
 </style>
+
+<!-- Schema: Organization + LocalBusiness (2 cơ sở) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://eggtea.vn/#organization",
+      "name": "Egg Tea",
+      "alternateName": "Trà sữa Egg Tea",
+      "url": "https://eggtea.vn/",
+      "logo": "https://eggtea.vn/assets/img/favicon-egg-tea.png",
+      "image": "https://eggtea.vn/anh1.png",
+      "description": "Trà sữa thủ công Việt Nam, nguyên liệu 100% tự nhiên, pha chế mỗi ngày."
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://eggtea.vn/#website",
+      "url": "https://eggtea.vn/",
+      "name": "Egg Tea — Trà sữa thủ công Nam Định",
+      "inLanguage": "vi-VN",
+      "publisher": {"@id": "https://eggtea.vn/#organization"}
+    },
+    {
+      "@type": "CafeOrCoffeeShop",
+      "@id": "https://eggtea.vn/cua-hang.html#hungvuong",
+      "name": "Egg Tea — Cơ sở 1 Hùng Vương",
+      "image": "https://eggtea.vn/anh1.png",
+      "telephone": "+84888836556",
+      "priceRange": "15.000đ - 45.000đ",
+      "servesCuisine": ["Trà sữa", "Kombucha", "Trà trái cây"],
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "152 Hùng Vương",
+        "addressLocality": "Nam Định",
+        "addressRegion": "Ninh Bình",
+        "addressCountry": "VN"
+      },
+      "openingHoursSpecification": [{
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+        "opens": "08:00",
+        "closes": "22:30"
+      }],
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "127"
+      }
+    },
+    {
+      "@type": "CafeOrCoffeeShop",
+      "@id": "https://eggtea.vn/cua-hang.html#thdao",
+      "name": "Egg Tea — Cơ sở 2 Trần Hưng Đạo",
+      "image": "https://eggtea.vn/anh2.png",
+      "telephone": "+84886565638",
+      "priceRange": "15.000đ - 45.000đ",
+      "servesCuisine": ["Trà sữa", "Kombucha", "Trà trái cây"],
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "173 Trần Hưng Đạo",
+        "addressLocality": "Nam Định",
+        "addressRegion": "Ninh Bình",
+        "addressCountry": "VN"
+      },
+      "openingHoursSpecification": [{
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+        "opens": "08:00",
+        "closes": "22:00"
+      }]
+    }
+  ]
+}
+</script>
 </head>
 <body class="bg-surface text-on-surface" data-page="home">
 <div id="site-header"></div>
@@ -79,13 +187,13 @@
       <!-- HERO SLIDER - 3 ảnh sản phẩm Egg Tea -->
       <div id="hero-slider" class="hero-slider z-10">
         <div class="hero-slide" data-state="active">
-          <img alt="Trà sữa Egg Tea 1" class="cup-solo" src="anh1.png"/>
+          <img alt="Ly trà sữa Egg Tea hương nhài sốt xoài — sản phẩm bán chạy nhất tại Nam Định" class="cup-solo" src="anh1.png" width="667" height="1000" fetchpriority="high" decoding="async"/>
         </div>
         <div class="hero-slide" data-state="upcoming">
-          <img alt="Trà sữa Egg Tea 2" class="cup-solo" src="anh2.png" style="width:92%;max-width:500px;"/>
+          <img alt="Ly trà sữa Egg Tea sốt dâu tây tươi mát" class="cup-solo" src="anh2.png" style="width:92%;max-width:500px;" width="1000" height="667" loading="lazy" decoding="async"/>
         </div>
         <div class="hero-slide" data-state="upcoming">
-          <img alt="Trà sữa Egg Tea 3" class="cup-solo" src="anh3.png?v=2"/>
+          <img alt="Ly trà sữa Egg Tea sốt chanh leo nhiệt đới" class="cup-solo" src="anh3.png?v=2" width="529" height="489" loading="lazy" decoding="async"/>
         </div>
       </div>
 
